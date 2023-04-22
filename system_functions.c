@@ -52,7 +52,20 @@ static bool bandera_blink = FALSE;
         SW_1 = SW_1 + 1;    //Incrementamos en 1 el contador cada que el Switch 1 sea pulsado
 
         //Caso 1, con un pulso en Switch 1, no realiza nada
-
+      /*  if( SW_1 == 1)
+                {
+                    if(bandera_blink == FALSE)
+                    {
+                        bandera_blink = TRUE;   //Cambiamos estado de la bandera
+                        GPIO_setOutput(BSP_LED2_PORT, BSP_LED2, 0); //RGB_RED_OFF
+                        GPIO_setOutput(BSP_LED2_PORT, BSP_LED3, 1); //RGB_GREEN_ON
+                        GPIO_setOutput(BSP_LED2_PORT, BSP_LED4, 0); //RGB_BLUE_OFF
+                    }
+                }
+                else
+                {
+                    bandera_blink = FALSE; // REGRESA EL ESTADO DE LA VARIABLE A FALSE
+                }*/
         //Caso 2, con dos pulsos en SW 2, Enciende color Rojo
         if( SW_1 == 2)
         {
@@ -68,11 +81,16 @@ static bool bandera_blink = FALSE;
         {
             bandera_blink = FALSE; // REGRESA EL ESTADO DE LA VARIABLE A FALSE
         }
-
-
+        if( SW_1 == 3)
+        {
+            SW_1 = 0;
+            GPIO_setOutput(BSP_LED2_PORT, BSP_LED2, 0); //RGB_RED_OFF
+            GPIO_setOutput(BSP_LED2_PORT, BSP_LED3, 0); //RGB_GREEN_OFF
+            GPIO_setOutput(BSP_LED2_PORT, BSP_LED4, 0); //RGB_BLUE_OFF
+        }
         while(GPIO_getInputPinValue(BSP_BUTTON1_PORT, BSP_BUTTON1) != BOARD_BUTTON_NORMAL_STATE);
     }
-    //---------Control_PB_2------------//
+ /*   //---------Control_PB_2------------//
     if(GPIO_getInputPinValue(BSP_BUTTON2_PORT, BSP_BUTTON2) !=BOARD_BUTTON_NORMAL_STATE) // Entra cuando se presiona el botón 2.
     {
     SW_2 = SW_2 + 1;    //Incrementamos en 1 cada que el Switch 2 es pulsado
@@ -107,6 +125,19 @@ static bool bandera_blink = FALSE;
             {
                 bandera_blink = FALSE; // REGRESA EL ESTADO DE LA VARIABLE A FALSE
             }
-    while(GPIO_getInputPinValue(BSP_BUTTON2_PORT, BSP_BUTTON2) != BOARD_BUTTON_NORMAL_STATE);
-    }
+    if( SW_2 == 3)
+                {
+                    if(bandera_blink == FALSE)
+                    {
+                        bandera_blink = TRUE;   //Cambiamos estado de la bandera
+                        GPIO_setOutput(BSP_LED2_PORT, BSP_LED2, 0); //RGB_RED_ON
+                        GPIO_setOutput(BSP_LED2_PORT, BSP_LED3, 0); //RGB_GREEN_ON
+                        GPIO_setOutput(BSP_LED2_PORT, BSP_LED4, 0); //RGB_BLUE_OFF
+                    }
+                }
+                else
+                {
+                    bandera_blink = FALSE; // REGRESA EL ESTADO DE LA VARIABLE A FALSE
+                }*/
+//    while(GPIO_getInputPinValue(BSP_BUTTON2_PORT, BSP_BUTTON2) != BOARD_BUTTON_NORMAL_STATE);   }
 }
