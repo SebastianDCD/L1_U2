@@ -46,7 +46,7 @@ uint8_t SW_2 = 0;
 void process_events(void)
 {
 static bool bandera_blink = FALSE;
-
+    //---------Control_PB_1------------//
     if(GPIO_getInputPinValue(BSP_BUTTON1_PORT, BSP_BUTTON1) != BOARD_BUTTON_NORMAL_STATE) // Entra cuando se presiona el botón 1.
     {
         SW_1 = SW_1 + 1;    //Incrementamos en 1 el contador cada que el Switch 1 sea pulsado
@@ -59,10 +59,39 @@ static bool bandera_blink = FALSE;
             if(bandera_blink == FALSE)
             {
                 bandera_blink = TRUE;   //Cambiamos estado de la bandera
-                GPIO_setOutput(BSP_LED2_PORT, BSP_LED2, 1);
+                GPIO_setOutput(BSP_LED2_PORT, BSP_LED2, 1); //RGB_RED_OFF
+                GPIO_setOutput(BSP_LED2_PORT, BSP_LED3, 0); //RGB_GREEN_OFF
+                GPIO_setOutput(BSP_LED2_PORT, BSP_LED4, 0); //RGB_BLUE_OFF
             }
         }
+        else
+        {
+            bandera_blink = FALSE; // REGRESA EL ESTADO DE LA VARIABLE A FALSE
+        }
+
 
         while(GPIO_getInputPinValue(BSP_BUTTON1_PORT, BSP_BUTTON1) != BOARD_BUTTON_NORMAL_STATE);
+    }
+    //---------Control_PB_2------------//
+    if(GPIO_getInputPinValue(BSP_BUTTON2_PORT, BSP_BUTTON2) !=BOARD_BUTTON_NORMAL_STATE) // Entra cuando se presiona el botón 2.
+    {
+    SW_2 = SW_2 + 1;    //Incrementamos en 1 cada que el Switch 2 es pulsado
+
+    //Caso 1 con un pulso enciende RGB_AZUL:
+    if( SW_2 == 1)
+    {
+        if(bandera_blink == FALSE)
+        {
+            bandera_blink = TRUE;   //Cambiamos estado de la bandera
+            GPIO_setOutput(BSP_LED2_PORT, BSP_LED2, 0); //RGB_RED_OFF
+            GPIO_setOutput(BSP_LED2_PORT, BSP_LED3, 0); //RGB_GREEN_OFF
+            GPIO_setOutput(BSP_LED2_PORT, BSP_LED4, 1); //RGB_BLUE_ON
+        }
+    }
+    else
+    {
+        bandera_blink = FALSE; // REGRESA EL ESTADO DE LA VARIABLE A FALSE
+    }
+    while(GPIO_getInputPinValue(BSP_BUTTON2_PORT, BSP_BUTTON2) != BOARD_BUTTON_NORMAL_STATE);
     }
 }
