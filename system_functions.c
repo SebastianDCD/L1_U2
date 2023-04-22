@@ -37,7 +37,7 @@ void funcion_inicial (void)
     printf("Dos veces boton 1, LED ROJO\n");
     printf("Una vez boton 2, LED AZUL\n");
     printf("Dos veces boton 2, LED AMARILLO\n");
-    printf("Tres veces cualquier boton, LED OFF, Cuentas reiniciadas");
+    printf("Tres veces cualquier boton, LED OFF, Cuentas reiniciadas\n");
 }
 
 //Declaracion de variables para contadores de pulsaciones de cada Switch/Push B
@@ -57,7 +57,11 @@ _delay_cycles(1000000);
         //Caso 2, con dos pulsos en SW 1, Enciende color Rojo
         if( SW_1 == 2)
         {
-            printf("Se ha pulsado dos veces SW 1");
+            printf("Se ha pulsado una vez SW 1\n");
+        }
+        if( SW_1 == 2)
+        {
+            printf("Se ha pulsado dos veces SW 1\n");
             if(bandera_blink == FALSE)
             {
                 bandera_blink = TRUE;   //Cambiamos estado de la bandera
@@ -72,7 +76,7 @@ _delay_cycles(1000000);
         }
         if( SW_1 == 3)
         {
-            printf("Se ha reiniciado la cuenta");
+            printf("Se ha reiniciado ambas cuentas\n");
             SW_1 = 0;
             SW_2 = 0;
             GPIO_setOutput(BSP_LED2_PORT, BSP_LED2, 0); //RGB_RED_OFF
@@ -89,7 +93,7 @@ _delay_cycles(1000000);
     //Caso 1 con un pulso enciende RGB_AZUL:
     if( SW_2 == 1)
     {
-        printf("Se ha pulsado una vez SW 2");
+        printf("Se ha pulsado una vez SW 2\n");
         if(bandera_blink == FALSE)
         {
             bandera_blink = TRUE;   //Cambiamos estado de la bandera
@@ -105,6 +109,7 @@ _delay_cycles(1000000);
     //Caso 3 con un pulso enciende RGB_AMARILLO:
     if( SW_2 == 2)
     {
+        printf("Se ha pulsado dos veces SW 2\n");
         if(bandera_blink == FALSE)
         {
             bandera_blink = TRUE;   //Cambiamos estado de la bandera
@@ -119,6 +124,7 @@ _delay_cycles(1000000);
     }
     if( SW_2 == 3)
     {
+        printf("Se ha reiniciado ambas cuentas\n");
         SW_1 = 0;
         SW_2 = 0;
         GPIO_setOutput(BSP_LED2_PORT, BSP_LED2, 0); //RGB_RED_OFF
