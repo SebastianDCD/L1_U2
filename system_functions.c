@@ -55,7 +55,7 @@ _delay_cycles(1000000);
     {
         SW_1 = SW_1 + 1;    //Incrementamos en 1 el contador cada que el Switch 1 sea pulsado
         //Caso 2, con dos pulsos en SW 1, Enciende color Rojo
-        if( SW_1 == 2)
+        if( SW_1 == 1)
         {
             printf("Se ha pulsado una vez SW 1\n");
         }
