@@ -92,6 +92,21 @@ static bool bandera_blink = FALSE;
     {
         bandera_blink = FALSE; // REGRESA EL ESTADO DE LA VARIABLE A FALSE
     }
+    //Caso 3 con un pulso enciende RGB_AMARILLO:
+    if( SW_2 == 2)
+            {
+                if(bandera_blink == FALSE)
+                {
+                    bandera_blink = TRUE;   //Cambiamos estado de la bandera
+                    GPIO_setOutput(BSP_LED2_PORT, BSP_LED2, 1); //RGB_RED_ON
+                    GPIO_setOutput(BSP_LED2_PORT, BSP_LED3, 1); //RGB_GREEN_ON
+                    GPIO_setOutput(BSP_LED2_PORT, BSP_LED4, 0); //RGB_BLUE_OFF
+                }
+            }
+            else
+            {
+                bandera_blink = FALSE; // REGRESA EL ESTADO DE LA VARIABLE A FALSE
+            }
     while(GPIO_getInputPinValue(BSP_BUTTON2_PORT, BSP_BUTTON2) != BOARD_BUTTON_NORMAL_STATE);
     }
 }
