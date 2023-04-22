@@ -31,33 +31,36 @@ void funcion_inicial (void)
     printf("Sebastian De la Cruz Delgado\n");
     printf("Julian Emilio Gutierrez Loya\n");
     printf("Abril / 2023\n");
+    //----------------------------------------//
+    printf("//-------------------------//\n\tInstrucciones:\n");
+    printf("Dos veces boton 1, LED ROJO\n");
+    printf("Una vez boton 2, LED AZUL\n");
+    printf("Dos veces boton 2, LED AMARILLO\n");
+    printf("Tres veces cualquier boton, LED OFF, Cuentas reiniciadas");
 }
 
-/*FUNCTION******************************************************************************
-*
-* Function Name    : process_events
-* Returned Value   : None.
-* Comments         :
-*
-*END***********************************************************************************/
-uint8_t i = 0;
-uint8_t j = 0;
+//Declaracion de variables para contadores de pulsaciones de cada Switch/Push B
+uint8_t SW_1 = 0;
+uint8_t SW_2 = 0;
+
 void process_events(void)
 {
 static bool bandera_blink = FALSE;
 
     if(GPIO_getInputPinValue(BSP_BUTTON1_PORT, BSP_BUTTON1) != BOARD_BUTTON_NORMAL_STATE) // Entra cuando se presiona el botón 1.
     {
-        if(bandera_blink == FALSE)
-        {
-            bandera_blink = TRUE;
-            GPIO_setOutput(BSP_LED2_PORT,  BSP_LED2,  1);
-        }
+        SW_1 = SW_1 + 1;    //Incrementamos en 1 el contador cada que el Switch 1 sea pulsado
 
-        else
+        //Caso 1, con un pulso en Switch 1, no realiza nada
+
+        //Caso 2, con dos pulsos en SW 2, Enciende color Rojo
+        if( SW_1 == 2)
         {
-            bandera_blink = FALSE;
-            GPIO_setOutput(BSP_LED2_PORT,  BSP_LED2,  0);
+            if(bandera_blink == FALSE)
+            {
+                bandera_blink = TRUE;   //Cambiamos estado de la bandera
+                GPIO_setOutput(BSP_LED2_PORT, BSP_LED2, 1);
+            }
         }
 
         while(GPIO_getInputPinValue(BSP_BUTTON1_PORT, BSP_BUTTON1) != BOARD_BUTTON_NORMAL_STATE);
